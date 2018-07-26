@@ -17,7 +17,7 @@ def acc_auth2(account,password):
     data = db_api("select * from accounts where account=%s" % account)
 
     if data['password'] == password:
-        exp_time_stamp = time.mktime(time.strptime(data['expir_date'],"%Y-%m%-d"))
+        exp_time_stamp = time.mktime(time.strptime(data['expire_date'], "%Y-%m-%d"))
         if time.time() > exp_time_stamp:
             print ("\033[31;1mAccount [%s] has expired,please contact the back to get a new card!\033[0m" % account)
         else:   # passed the authentication
