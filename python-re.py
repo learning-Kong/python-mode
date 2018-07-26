@@ -21,7 +21,7 @@ if obj:
     print (obj.end())
     print (obj.span())
 
-#search()方法与match()方法类似
+#search()方法与match()方法类似,search 不是从头匹配
 obj = re.search('\d+','45345uu456asf')
 if obj:
     print (obj.group())
@@ -60,3 +60,10 @@ print (s_s)
 r_str=re.fullmatch('\w+@\w+.(com|cn|edu)',"kongxainglei@qq.com")
 if r_str:
     print (r_str.group())
+
+#实例：
+with open('text-1.txt','r',encoding='utf-8') as f:
+    line = f.read()
+    print (line)
+    meil = re.findall('\w+.com',line)
+    print (meil)
