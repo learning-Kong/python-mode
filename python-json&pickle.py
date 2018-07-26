@@ -1,4 +1,4 @@
-#condiong: utf-8
+#conding: utf-8
 
 #Json模块提供了四个功能：dumps、dump、loads、load
 
