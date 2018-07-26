@@ -1,0 +1,5 @@
+作者：Xianglei Kong
+版本：初版 V0.1
+程序功能介绍：
+    实现ATM常用功能
+    程序使用python基础知识实现，用到time\os\sys\json\open\logging\函数\模块知识等知识点
