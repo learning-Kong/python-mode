@@ -65,5 +65,5 @@ if r_str:
 with open('text-1.txt','r',encoding='utf-8') as f:
     line = f.read()
     print (line)
-    meil = re.findall('\w+.com',line)
-    print (meil)
+    meil = re.search('\w+.com',line)
+    print (meil.group())
