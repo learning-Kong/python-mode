@@ -13,6 +13,10 @@ def acc_auth2(account,apassword):
     :return: if passed the authentication , retun the account object, otherwise ,return None
     '''
     db_api = db_handler.db_handler()
+    data = db_api("select * from accounts where account=%s" % account)
+
+    if
+
 
 def acc_login(user_data,log_obj):
     '''

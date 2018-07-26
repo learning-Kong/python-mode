@@ -54,6 +54,6 @@ def file_execute(sql,**kwargs):  # *kwargs 会把多传入的参数变成一个d
             print(account_file)
             if os.path.isfile(account_file):
                 account_data = kwargs.get("account_data")
-                with open(account_file,'r') as f
+                with open(account_file,'r') as f:
                     acc_data = json.dump(account_data,f)
                     return True
