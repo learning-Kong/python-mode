@@ -9,9 +9,8 @@ from core import db_handler
 def login_required(func):
     "验证用户是否登录成功"
     def wrapper(*args,**kwargs):
-        print('--wrapper--->',args,kwargs)
+        #print('--wrapper--->',args,kwargs)
         if args[0].get('is_authebticated'):
-            print (1)
             return func(*args,**kwargs)
         else:
             exit("User is not authenticated.!!!")

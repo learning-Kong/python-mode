@@ -14,7 +14,7 @@ def file_db_handle(conn_params):
     :param conn_params: the db connection params set in settings
     :return:
     '''
-    print ('file db',conn_params)
+    #print ('file db',conn_params)
     return file_execute
 
 def db_handler():
@@ -32,15 +32,15 @@ def db_handler():
 def file_execute(sql,**kwargs):  # *kwargs 会把多传入的参数变成一个dict形式
     conn_params = settings.DATABASE
     db_path = '%s/%s' % (conn_params['path'],conn_params['name'])
-    print (sql,db_path)
+    #print (sql,db_path)
     sql_list = sql.split("where")
-    print (sql_list)
+    #print (sql_list)
     if sql_list[0].startswith("select") and len(sql_list) > 1: #has where clause
         column,val = sql_list[1].strip().split("=")
 
         if column == 'account':
             account_file = "%s/%s.json" % (db_path,val)
-            print (account_file)
+            #print (account_file)
             if os.path.isfile(account_file):
                 with open(account_file,'r') as f:
                     account_data = json.load(f)
@@ -51,9 +51,9 @@ def file_execute(sql,**kwargs):  # *kwargs 会把多传入的参数变成一个d
         column,val = sql_list[1].strip().split("=")
         if column == 'account':
             account_file = "%s/%s.json" % (db_path,val)
-            print(account_file)
+            #print(account_file)
             if os.path.isfile(account_file):
                 account_data = kwargs.get("account_data")
-                with open(account_file,'r') as f:
+                with open(account_file,'w') as f:
                     acc_data = json.dump(account_data,f)
                     return True

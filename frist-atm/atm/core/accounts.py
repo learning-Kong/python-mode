@@ -2,8 +2,7 @@
 #__author__:"Xianglei Kong"
 
 
-import core import db_handler
-import conf import settings
+from core import db_handler
 
 def load_current_balance(account_id):
     '''
@@ -23,4 +22,4 @@ def dump_account(account_data):
     db_api = db_handler.db_handler()
     data = db_api("update accounts where account=%s" % account_data['id'],account_data=account_data)
 
-    return Ture
+    return True
