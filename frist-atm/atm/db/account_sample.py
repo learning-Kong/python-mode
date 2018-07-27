@@ -14,5 +14,3 @@ acc_dic = {
     'pay_day': 22,
     'status': 0  # 0 = normal, 1 = locked, 2 = disabled
 }
-
-print (json.dumps(acc_dic))
