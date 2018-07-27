@@ -14,6 +14,7 @@ DATABASE = {
 }
 
 LOG_LEVEL = logging.INFO
+
 LOG_TYPES = {
     'transaction':'transaction.log',
     'access':'access.log'

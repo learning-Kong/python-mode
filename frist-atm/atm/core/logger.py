@@ -22,6 +22,9 @@ def logger(log_type):
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
     # add formatter to ch and fh
+    ch.setFormatter(formatter)
+    fh.setFormatter(formatter)
+    # add formatter to ch and fh
     logger.addHandler(ch)
     logger.addHandler(fh)
 
