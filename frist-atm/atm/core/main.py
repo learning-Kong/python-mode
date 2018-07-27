@@ -45,8 +45,30 @@ def repay(acc_data):
             print ('\033[31;1m[%s] is not a valid amount, only accept integer!\033[0m' % repay_amount)
         if repay_amount == 'b':
             back_flag = True
+
 def withdraw(acc_data):
-    pass
+    '''
+    print current balance and let user do the withdraw action
+    :param acc_data:
+    :return:
+    '''
+    account_data = accounts.load_current_balance(acc_data['account_id'])
+    current_balance=''' --------- BALANCE INFO --------
+        Credit :    %s
+        Balance:    %s'''%(account_data['credit'],account_data['balance'])
+    print (current_balance)
+    back_flag = False
+    while not back_flag:
+        withdraw_amount = input("\033[33;1mInput withdraw amount:\033[0m").strip()
+        if withdraw_amount.isdigit() and len(withdraw_amount) > 0:
+            new_balance = transaction.make_transaction(trans_logger,account_data,'withdraw',withdraw_amount)
+            if new_balance:
+                print('''\033[31;1mNew Balance:%s\033[0m''' % (new_balance['balance']))
+            else:
+                print('\033[31;1m[%s] is not a valid amount, only accept integer!\033[0m' % withdraw_amount)
+        if withdraw_amount == 'b':
+            back_flag = True
+
 def transfer(acc_data):
     pass
 def pay_check(acc_data):
