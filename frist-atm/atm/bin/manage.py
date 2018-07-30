@@ -30,7 +30,6 @@ def add_account():
 def change_credit():
     user_account = input('\033[32;2m input  the id you want change >>:  \033[0m')
     user_file = ("%s/%s/%s.json" % (settings.DATABASE["path"], settings.DATABASE["name"], user_account))
-    print (user_file)
     if os.path.isfile(user_file):
         new_credit = input("please input the money >>: ").strip()
         if new_credit.isdigit() and len(new_credit) > 0:
@@ -43,9 +42,17 @@ def change_credit():
             print ('\033[31;1m please input a digit!! \033[0m')
     else:
         print ("\033[31;1m No such user! \033[0m")
-
 def frozen():
-    pass
+    user_account = input('\033[32;2m input  the id you want frozen >>:  \033[0m')
+    user_file = ("%s/%s/%s.json" % (settings.DATABASE["path"], settings.DATABASE["name"], user_account))
+    if os.path.isfile(user_file):
+        print('''input 1 to frozen id\ninput 0 to thaw id''')
+        status = input('>>: ')
+        with open (user_file,'r') as f:
+            user_info = json.load(f)
+            user_info['status'] = status
+        with open(user_file,'w') as f:
+            json.dump(user_info, f)
 manage_info = '''\033[31;2m------- welcome manager -------
     input 1: add account
     input 2: change Credit
