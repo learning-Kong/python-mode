@@ -20,9 +20,7 @@ def make_transaction(log_obj,account_data,tran_type,amount,**others):
         old_balance = account_data['balance']
         if settings.TRANSACTION_TYPE[tran_type]['action'] == 'plus':
             new_balance = old_balance + amount + interest
-            print (new_balance)
         elif settings.TRANSACTION_TYPE[tran_type]['action'] == 'minus':
-            print (interest)
             new_balance = old_balance - amount - interest
             # check credit
             if new_balance < 0:
