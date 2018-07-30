@@ -2,12 +2,15 @@
 #__author__:"Xianglei Kong"
 
 import time
+import os
+import json
 
 from core import logger
 from core import auth
 from core.auth import login_required
 from core import accounts
 from core import transaction
+from conf import settings
 
 # temp account data ,only saves the data in memory
 user_data = {
@@ -70,7 +73,33 @@ def withdraw(acc_data):
             back_flag = True
 
 def transfer(acc_data):
-    pass
+    '''
+    print current balance and let user do the transfer action
+    :param acc_data:
+    :return:
+    '''
+    account_data = accounts.load_current_balance(acc_data['account_id'])
+    current_balance = ''' --------- BALANCE INFO --------
+            Credit :    %s
+            Balance:    %s''' % (account_data['credit'], account_data['balance'])
+    print(current_balance)
+    back_flag = False
+    while not back_flag:
+        trans_user = input('input the ID who you want transfer >>: ')
+        trans_user_file = ("%s/%s/%s.json" % (settings.DATABASE['path'],settings.DATABASE['name'],trans_user))
+        if os.path.isfile(trans_user_file):
+            balance = input('input transfer balance>>: ').strip()
+            if balance.isdigit() and len(balance) > 0:
+                new_balance = transaction.make_transaction(trans_logger,account_data,'transfer',balance)
+            if new_balance:
+                print('''\033[31;1mNew Balance:%s\033[0m''' % (new_balance['balance']))
+                with open (trans_user_file,'r') as f:
+                    trans_user_data = json.load(f)
+                    transaction.make_transaction(trans_logger,trans_user_data,'repay',balance)
+            else:
+                print('\033[31;1m[%s] is not a valid amount, only accept integer!\033[0m' % balance)
+        else:
+            print ("no such user")
 def pay_check(acc_data):
     pass
 def logout(acc_data):

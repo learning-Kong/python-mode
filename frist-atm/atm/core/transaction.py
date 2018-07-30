@@ -24,8 +24,7 @@ def make_transaction(log_obj,account_data,tran_type,amount,**others):
             new_balance = old_balance - amount - interest
             # check credit
             if new_balance < 0:
-                print ('''\033[31;1mYour credit [%s] is not enough for this transaction [-%s], your current balance is
-                [%s]''' %(account_data['credit']),(amount + interest),old_balance)
+                print ('''\033[31;1mYour credit [%s] is not enough for this transaction [-%s], your current balance is[%s]''' %(account_data['credit'],(amount + interest),old_balance))
                 return
         account_data['balance'] = new_balance
         accounts.dump_account(account_data) #save the new balance back to file
