@@ -4,6 +4,7 @@
 import time
 import os
 import json
+import re
 
 from core import logger
 from core import auth
@@ -100,10 +101,17 @@ def transfer(acc_data):
                 print('\033[31;1m[%s] is not a valid amount, only accept integer!\033[0m' % balance)
         else:
             print ("no such user")
+        if trans_user ==  'b':
+            back_flag = True
 def pay_check(acc_data):
-    pass
+    log_file = "%s/log/%s" % (settings.BASE_DIR, settings.LOG_TYPES['transaction'])
+    with open(log_file,'r') as f:
+        log_file_info = f.read()
+        acc_data_log = re.findall('.+account:%s.+' % acc_data['account_data']['id'],log_file_info)
+        for line in acc_data_log:
+            print (line)
 def logout(acc_data):
-    pass
+    print ("have a nice day")
 def interactive(acc_data):
     '''
     interact with user
@@ -133,7 +141,8 @@ def interactive(acc_data):
         user_option = input(">>: ").strip()
         if user_option in menu_dic:
             menu_dic[user_option](acc_data)
-
+            if user_option == '6':
+                exit_flag = True
         else:
             print ("\033[31;1m Option does not exist!\033[0m")
 
