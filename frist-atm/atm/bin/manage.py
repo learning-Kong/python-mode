@@ -4,7 +4,7 @@
 import os
 import sys
 import datetime
-
+import json
 
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(base_dir)
@@ -15,9 +15,10 @@ from conf import settings
 def add_account():
     user_account = input("\033[31;2muser_account: \033[0m").strip()
     user_password = input("\033[31;2muser_password: \033[0m").strip()
-    user_file = "%s/%s"
-    print ("settings.DATABASE/%s.json" % user_account)
-    if os.path.isfile("settings.DATABASE/%s.json" % user_account):
+    user_file = ("%s/%s/%s.json" % (settings.DATABASE["path"],settings.DATABASE["name"],user_account))
+    print (user_file)
+    print
+    if os.path.isfile(user_file):
         print ("The account is exit!")
         return
     else:
@@ -26,6 +27,8 @@ def add_account():
         account_sample.acc_dic['password'] = user_password
         account_sample.acc_dic['enroll_date'] = enroll_data
         print (account_sample.acc_dic)
+        with open(user_file,'w') as f:
+            json.dump(account_sample.acc_dic,f)
 def change_credit():
     pass
 def frozen():
@@ -47,7 +50,6 @@ while not exit_flags:
     print(manage_info)
     manage_option = input(">>: ").strip()
     if manage_option in manage_dic:
-        print (type(manage_option))
         if manage_option == '4':
             print ('see you')
             exit_flags = True
