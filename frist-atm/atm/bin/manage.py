@@ -16,8 +16,6 @@ def add_account():
     user_account = input("\033[31;2muser_account: \033[0m").strip()
     user_password = input("\033[31;2muser_password: \033[0m").strip()
     user_file = ("%s/%s/%s.json" % (settings.DATABASE["path"],settings.DATABASE["name"],user_account))
-    print (user_file)
-    print
     if os.path.isfile(user_file):
         print ("The account is exit!")
         return
@@ -30,7 +28,22 @@ def add_account():
         with open(user_file,'w') as f:
             json.dump(account_sample.acc_dic,f)
 def change_credit():
-    pass
+    user_account = input('\033[32;2m input  the id you want change >>:  \033[0m')
+    user_file = ("%s/%s/%s.json" % (settings.DATABASE["path"], settings.DATABASE["name"], user_account))
+    print (user_file)
+    if os.path.isfile(user_file):
+        new_credit = input("please input the money >>: ").strip()
+        if new_credit.isdigit() and len(new_credit) > 0:
+            with open (user_file,'r') as f:
+                user_info = json.load(f)
+                user_info['credit'] = new_credit
+            with open(user_file, 'w') as f:
+                json.dump(user_info,f)
+        else:
+            print ('\033[31;1m please input a digit!! \033[0m')
+    else:
+        print ("\033[31;1m No such user! \033[0m")
+
 def frozen():
     pass
 manage_info = '''\033[31;2m------- welcome manager -------
@@ -54,5 +67,4 @@ while not exit_flags:
             print ('see you')
             exit_flags = True
         else:
-            manage_dic["1"]()
-            #manage_dic[manage_option]()
+            manage_dic[manage_option]()
