@@ -1,2 +1,2 @@
-#_*_coding:utf-8_*_
+#coding:utf-8
 #__author__:"Xianglei Kong"
